@@ -15,9 +15,12 @@ public class CategoryModel implements CategoryContract.Model {
     private String data;
 
     private final List<CategoryItem> itemList = new ArrayList<>();
+    private final int COUNT = 20;
 
-    public CategoryModel(String data) {
-        this.data = data;
+    public CategoryModel() {
+        for (int index =1; index <= COUNT; index++ ){
+            addProduct(createProduct(index));
+        }
     }
 
     @Override
@@ -45,5 +48,14 @@ public class CategoryModel implements CategoryContract.Model {
     public List<CategoryItem> fetchCategoryListData(){
         Log.e(TAG, "fetchCategoryListData");
         return itemList;
+    }
+    private void addProduct(CategoryItem item){
+        itemList.add(item);
+    }
+
+    private CategoryItem createProduct(int position){
+        String content = "Category" + position;
+
+        return new CategoryItem(position, content);
     }
 }

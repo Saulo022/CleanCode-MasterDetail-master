@@ -33,6 +33,8 @@ public interface CategoryContract {
         void onPause();
 
         void onDestroy();
+
+        void selectCategoryListData(CategoryItem category);
     }
 
     interface Model {

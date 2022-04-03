@@ -2,6 +2,9 @@ package es.ulpgc.eite.cleancode.catalog.categoryCatalog;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.cleancode.catalog.app.CatalogMediator;
+import es.ulpgc.eite.cleancode.catalog.app.CategoryItem;
+
 public class CategoryPresenter implements CategoryContract.Presenter {
 
     public static String TAG = CategoryPresenter.class.getSimpleName();
@@ -9,9 +12,9 @@ public class CategoryPresenter implements CategoryContract.Presenter {
     private WeakReference<CategoryContract.View> view;
     private CategoryState state;
     private CategoryContract.Model model;
-    private AppMediator mediator;
+    private CatalogMediator mediator;
 
-    public CategoryPresenter(AppMediator mediator) {
+    public CategoryPresenter(CatalogMediator mediator) {
         this.mediator = mediator;
         state = mediator.getCategoryState();
     }
@@ -21,20 +24,8 @@ public class CategoryPresenter implements CategoryContract.Presenter {
         // Log.e(TAG, "onStart()");
 
         // initialize the state
-        state = new CategoryState();
-
-        // call the model and update the state
-        state.data = model.getStoredData();
-
-        // use passed state if is necessary
-        PreviousToCategoryState savedState = getStateFromPreviousScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onDataFromPreviousScreen(savedState.data);
-
-            // update the state if is necessary
-            state.data = savedState.data;
+        if (state == null) {
+            state = new CategoryState();
         }
     }
 
@@ -43,7 +34,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
         // Log.e(TAG, "onRestart()");
 
         // update the model if is necessary
-        model.onRestartScreen(state.data);
+        //model.onRestartScreen(state.);
     }
 
     @Override
@@ -59,15 +50,11 @@ public class CategoryPresenter implements CategoryContract.Presenter {
 
             // update the state if is necessary
             //state.data = savedState.data;
-        }
-
-        // call the model and update the state
-        //state.data = model.getStoredData();
-
-        // update the view
         view.get().onDataUpdated(state);
 
-    }
+        }
+
+
 
     @Override
     public void onBackPressed() {
@@ -106,6 +93,16 @@ public class CategoryPresenter implements CategoryContract.Presenter {
         state.categories = model.fetchCategoryListData();
         // call the model
         view.get().onDataUpdated(state);
+    }
+
+    private void passDataToCategoryDetailScreen(CategoryItem categoryItem){
+        mediator.setCategory(categoryItem);
+    }
+
+    @Override
+    public void selectCategoryListData(CategoryItem category){
+        passDataToCategoryDetailScreen(category);
+        view.get().navigateToNextScreen();
     }
 
     @Override
