@@ -15,7 +15,7 @@ public class CategoryModel implements CategoryContract.Model {
     private String data;
 
     private final List<CategoryItem> itemList = new ArrayList<>();
-    private final int COUNT = 15;
+    private final int COUNT = 20;
 
     public CategoryModel() {
         for (int index =1; index <= COUNT; index++ ){
@@ -54,7 +54,7 @@ public class CategoryModel implements CategoryContract.Model {
     }
 
     private CategoryItem createProduct(int position){
-        String content = "Category" + position;
+        String content = "Category " + position;
 
         return new CategoryItem(position, content);
     }
