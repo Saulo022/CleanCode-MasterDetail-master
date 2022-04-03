@@ -6,6 +6,6 @@
     android:id="@+id/category_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".products.ProductListActivity"
-    tools:listitem="@layout/product_list_content"/>
+    tools:context=".categoryCatalog.CategoryActivity"
+    tools:listitem="@layout/category_content"/>
 

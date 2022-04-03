@@ -54,13 +54,6 @@ public class CategoryActivity
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        presenter.onBackPressed();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
 

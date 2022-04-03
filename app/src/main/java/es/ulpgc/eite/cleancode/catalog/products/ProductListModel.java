@@ -13,11 +13,13 @@ public class ProductListModel implements ProductListContract.Model {
 
   private final List<ProductItem> itemList = new ArrayList<>();
   private final int COUNT = 20;
+  private int category;
 
-  public ProductListModel() {
+  public ProductListModel(int category) {
     // Add some sample items
+    this.category = category;
     for (int index = 1; index <= COUNT; index++) {
-      addProduct(createProduct(index));
+      addProduct(createProduct(index, category));
     }
   }
 
@@ -32,18 +34,18 @@ public class ProductListModel implements ProductListContract.Model {
   }
 
 
-  private ProductItem createProduct(int position) {
-    String content = "Product " + position;
+  private ProductItem createProduct(int position, int category) {
+    String content = "Product " + category + "." + position;
 
     return new ProductItem(
-        position, content, fetchProductDetails(position)
+        position, content, fetchProductDetails(position, category)
     );
 
   }
 
 
-  private String fetchProductDetails(int position) {
-    String content = "Details about Product:  " + position;
+  private String fetchProductDetails(int position, int category) {
+    String content = "Details about Product:  " + category + "." + position;
     StringBuilder builder = new StringBuilder();
     builder.append(content);
 

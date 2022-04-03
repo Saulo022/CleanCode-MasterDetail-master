@@ -15,7 +15,7 @@ public class CategoryModel implements CategoryContract.Model {
     private String data;
 
     private final List<CategoryItem> itemList = new ArrayList<>();
-    private final int COUNT = 20;
+    private final int COUNT = 15;
 
     public CategoryModel() {
         for (int index =1; index <= COUNT; index++ ){

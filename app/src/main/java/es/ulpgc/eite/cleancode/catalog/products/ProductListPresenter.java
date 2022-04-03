@@ -3,6 +3,7 @@ package es.ulpgc.eite.cleancode.catalog.products;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.cleancode.catalog.app.CatalogMediator;
+import es.ulpgc.eite.cleancode.catalog.app.CategoryItem;
 import es.ulpgc.eite.cleancode.catalog.app.ProductItem;
 
 
@@ -49,6 +50,10 @@ public class ProductListPresenter implements ProductListContract.Presenter {
   public void fetchProductListData() {
     // Log.e(TAG, "fetchProductListData()");
 
+    CategoryItem savedState = mediator.getCategory();
+    if (savedState != null){
+      state.category = savedState.id;
+    }
     // call the model
     state.products = model.fetchProductListData();
 
